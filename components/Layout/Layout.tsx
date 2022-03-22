@@ -6,7 +6,7 @@ import { ZaloPlugin } from "../Social/Zalo";
 export const Layout: React.FC = ({ children }) => {
   return (
     <>
-      {/* <FacebookPlugin /> */}
+      <FacebookPlugin />
       {/* <ZaloPlugin /> */}
       <Navbar />
       {children}
