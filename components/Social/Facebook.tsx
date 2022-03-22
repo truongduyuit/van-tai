@@ -1,6 +1,4 @@
 import { Box } from "@chakra-ui/react";
-import { m } from "framer-motion";
-import Script from "next/script";
 import { useEffect } from "react";
 
 declare const window: Window &
