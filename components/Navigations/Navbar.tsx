@@ -46,6 +46,7 @@ export default function Navbar() {
           borderStyle={"solid"}
           borderColor={useColorModeValue("gray.200", "gray.900")}
           align={"center"}
+          fontFamily="sans-serif"
         >
           <Flex
             flex={{ base: 1, md: "auto" }}
@@ -125,7 +126,7 @@ const DesktopNav = () => {
               >
                 {navItem.label}
                 {navItem.children && (
-                  <Icon as={ChevronDownIcon} ml="0.25rem" w={4} h={4} />
+                  <Icon as={ChevronDownIcon} ml="0.2rem" w={4} h={6} />
                 )}
               </Link>
             </PopoverTrigger>
