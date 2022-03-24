@@ -1,7 +1,7 @@
-import { Box } from "@chakra-ui/react";
+import { Box, useColorModeValue } from "@chakra-ui/react";
 import type { NextPage } from "next";
 import Head from "next/head";
-import { Hero } from "../components/Heros/Hero";
+import { CallToAction, FeatureList, Hero, Statistic } from "../components";
 
 const Home: NextPage = () => {
   return (
@@ -12,7 +12,13 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <Hero />
+      <Hero mt={5} />
+
+      <FeatureList mt={5} />
+
+      <Statistic mt={5}></Statistic>
+
+      <CallToAction mt={5} />
 
       <Box h="20rem"></Box>
     </div>

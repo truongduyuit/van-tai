@@ -1,11 +1,18 @@
-import { Box, chakra, Icon, useColorModeValue, Image } from "@chakra-ui/react";
+import {
+  Box,
+  chakra,
+  Icon,
+  useColorModeValue,
+  Image,
+  BoxProps,
+} from "@chakra-ui/react";
 import Link from "next/link";
 
-export const Hero: React.FC = () => {
+export const Hero: React.FC<BoxProps> = ({ ...props }) => {
   const bg = useColorModeValue("white", "gray.800");
 
   return (
-    <Box pos="relative" overflow="hidden" bg={bg} mt={5}>
+    <Box pos="relative" overflow="hidden" bg={bg} {...props}>
       <Box maxW="7xl" mx="auto">
         <Box
           pos="relative"
