@@ -1,7 +1,13 @@
-import { Box, useColorModeValue } from "@chakra-ui/react";
+import { Box } from "@chakra-ui/react";
 import type { NextPage } from "next";
 import Head from "next/head";
-import { CallToAction, FeatureList, Hero, Statistic } from "../components";
+import {
+  CallToAction,
+  Contact,
+  FeatureList,
+  Hero,
+  Statistic,
+} from "../components";
 
 const Home: NextPage = () => {
   return (
@@ -20,7 +26,7 @@ const Home: NextPage = () => {
 
       <CallToAction mt={5} />
 
-      <Box h="20rem"></Box>
+      <Contact />
     </div>
   );
 };
