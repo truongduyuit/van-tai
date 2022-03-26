@@ -5,10 +5,12 @@ import {
   useColorModeValue,
   Image,
   BoxProps,
+  useColorMode,
 } from "@chakra-ui/react";
 import Link from "next/link";
 
 export const Hero: React.FC<BoxProps> = ({ ...props }) => {
+  const { colorMode } = useColorMode();
   const bg = useColorModeValue("white", "gray.800");
 
   return (
@@ -163,7 +165,11 @@ export const Hero: React.FC<BoxProps> = ({ ...props }) => {
           w="full"
           fit="cover"
           alt=""
-          src="/truck_and_driver.jpg"
+          src={
+            colorMode === "light"
+              ? "/truck_and_driver.jpg"
+              : "/truck_and_driver-dark.jpg"
+          }
           loading="lazy"
           ml={{ lg: 8 }}
         />

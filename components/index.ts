@@ -6,3 +6,6 @@ export * from "./Socials";
 export * from "./Features";
 export * from "./Statistics";
 export * from "./Actions";
+export * from "./Footers";
+export * from "./Commons";
+export * from "./Contacts";
