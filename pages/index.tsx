@@ -18,7 +18,7 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <Hero mt={5} />
+      <Hero />
 
       <FeatureList mt={5} />
 

@@ -4,10 +4,17 @@ import { Layout } from "../components/Layouts/Layout";
 import "../styles/globals.css";
 
 const colors = {
-  brand: {
-    900: "#1a365d",
-    800: "#153e75",
-    700: "#2a69ac",
+  light: {
+    bg: "#fff",
+    text: "#1A202C",
+    highlight: "#2185d0",
+    sub: "#2185d0",
+  },
+  dark: {
+    bg: "#1A202C",
+    text: "#fff",
+    highlight: "#2185d0",
+    sub: "#2185d0",
   },
 };
 
