@@ -7,7 +7,13 @@ export const Hotline: React.FC<BoxProps> = ({ ...rest }) => {
       <Box as="h5" w="12rem">
         <Icon as={PhoneIcon} mx={1} w={3} h={3} />
         Hotline:
-        <Box as="h1" mx={3} color="pink.500" display="inline-block">
+        <Box
+          as="h1"
+          mx={3}
+          color="highlight"
+          display="inline-block"
+          fontWeight="bold"
+        >
           1900 1900
         </Box>
       </Box>

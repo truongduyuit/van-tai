@@ -1,3 +1,4 @@
+import { Box } from "@chakra-ui/react";
 import { Footer } from "../Footers";
 import Navbar from "../Navigations/Navbar";
 import { FacebookPlugin } from "../Socials";
@@ -7,7 +8,7 @@ export const Layout: React.FC = ({ children }) => {
     <>
       <FacebookPlugin />
       <Navbar />
-      {children}
+      <Box zIndex={1}>{children}</Box>
       <Footer />
     </>
   );

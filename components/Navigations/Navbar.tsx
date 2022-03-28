@@ -11,10 +11,9 @@ import {
   Popover,
   PopoverTrigger,
   PopoverContent,
-  useColorModeValue,
   useBreakpointValue,
   useDisclosure,
-  Container,
+  useColorModeValue,
   useColorMode,
   useMediaQuery,
 } from "@chakra-ui/react";
@@ -35,65 +34,58 @@ export default function Navbar() {
 
   return (
     <Box>
-      <Container maxW="container.xl">
+      <Flex
+        bg={useColorModeValue("light.bg", "dark.bg")}
+        color={useColorModeValue("light.text", "dark.text")}
+        minH={"60px"}
+        py={{ base: 2 }}
+        px={{ base: 4 }}
+        borderBottom={1}
+        borderStyle="solid"
+        // borderColor={useColorModeValue("gray.200", "gray.900")}
+        align="center"
+      >
         <Flex
-          bg={useColorModeValue("white", "gray.800")}
-          color={useColorModeValue("gray.600", "white")}
-          minH={"60px"}
-          py={{ base: 2 }}
-          px={{ base: 4 }}
-          borderBottom={1}
-          borderStyle={"solid"}
-          borderColor={useColorModeValue("gray.200", "gray.900")}
-          align={"center"}
-          fontFamily="sans-serif"
+          flex={{ base: 1, md: "auto" }}
+          ml={{ base: -2 }}
+          display={{ base: "flex", md: "none" }}
         >
-          <Flex
-            flex={{ base: 1, md: "auto" }}
-            ml={{ base: -2 }}
-            display={{ base: "flex", md: "none" }}
-          >
-            <IconButton
-              onClick={onToggle}
-              icon={
-                isOpen ? (
-                  <CloseIcon w={3} h={3} />
-                ) : (
-                  <HamburgerIcon w={5} h={5} />
-                )
-              }
-              variant={"ghost"}
-              aria-label={"Toggle Navigation"}
-            />
-          </Flex>
-          <Flex flex={{ base: 1 }} justify={{ base: "center", md: "start" }}>
-            <Text
-              textAlign={useBreakpointValue({ base: "center", md: "left" })}
-              fontFamily={"heading"}
-              color={useColorModeValue("gray.800", "white")}
-            >
-              Logo
-              {isMobile && <Hotline my={5} />}
-            </Text>
-
-            <Flex display={{ base: "none", md: "flex" }} ml={10}>
-              <DesktopNav />
-            </Flex>
-          </Flex>
-
-          <Stack
-            flex={{ base: 1, md: 0 }}
-            justify={"flex-end"}
-            direction={"row"}
-            spacing={1}
-          >
-            {!isMobile && <Hotline />}
-            <Button onClick={toggleColorMode}>
-              {colorMode === "light" ? <MoonIcon /> : <SunIcon />}
-            </Button>
-          </Stack>
+          <IconButton
+            onClick={onToggle}
+            icon={
+              isOpen ? <CloseIcon w={3} h={3} /> : <HamburgerIcon w={5} h={5} />
+            }
+            variant={"ghost"}
+            aria-label={"Toggle Navigation"}
+          />
         </Flex>
-      </Container>
+        <Flex flex={{ base: 1 }} justify={{ base: "center", md: "start" }}>
+          <Text
+            textAlign={useBreakpointValue({ base: "center", md: "left" })}
+            fontFamily={"heading"}
+            color={useColorModeValue("gray.800", "white")}
+          >
+            Logo
+            {isMobile && <Hotline my={5} />}
+          </Text>
+
+          <Flex display={{ base: "none", md: "flex" }} ml={10}>
+            <DesktopNav />
+          </Flex>
+        </Flex>
+
+        <Stack
+          flex={{ base: 1, md: 0 }}
+          justify={"flex-end"}
+          direction={"row"}
+          spacing={1}
+        >
+          {!isMobile && <Hotline />}
+          <Button onClick={toggleColorMode}>
+            {colorMode === "light" ? <MoonIcon /> : <SunIcon />}
+          </Button>
+        </Stack>
+      </Flex>
 
       <Collapse in={isOpen} animateOpacity>
         <MobileNav />
@@ -103,9 +95,9 @@ export default function Navbar() {
 }
 
 const DesktopNav = () => {
-  const linkColor = useColorModeValue("gray.600", "gray.200");
-  const linkHoverColor = useColorModeValue("gray.900", "white");
-  const popoverContentBgColor = useColorModeValue("white", "gray.800");
+  const linkColor = "text";
+  const linkHoverColor = "highlight";
+  const popoverContentBgColor = useColorModeValue("#fff", "#1A202C");
 
   return (
     <Stack direction={"row"} spacing={4}>
@@ -122,6 +114,7 @@ const DesktopNav = () => {
                 _hover={{
                   textDecoration: "none",
                   color: linkHoverColor,
+                  fontWeight: "bold",
                 }}
               >
                 {navItem.label}
@@ -133,7 +126,6 @@ const DesktopNav = () => {
 
             {navItem.children && (
               <PopoverContent
-                border={0}
                 boxShadow={"xl"}
                 bg={popoverContentBgColor}
                 p={4}
@@ -162,13 +154,13 @@ const DesktopSubNav = ({ label, href, subLabel }: NavItem) => {
       display={"block"}
       p={2}
       rounded={"md"}
-      _hover={{ bg: useColorModeValue("pink.100", "gray.900") }}
+      _hover={{ bg: "subHighlight" }}
     >
       <Stack direction={"row"} align={"center"}>
         <Box>
           <Text
             transition={"all .3s ease"}
-            _groupHover={{ color: "pink.400" }}
+            _groupHover={{ color: "highlight", fontWeight: "bold" }}
             fontWeight={500}
           >
             {label}
@@ -184,7 +176,7 @@ const DesktopSubNav = ({ label, href, subLabel }: NavItem) => {
           align={"center"}
           flex={1}
         >
-          <Icon color={"pink.400"} w={5} h={5} as={ChevronRightIcon} />
+          <Icon color="highlight" w={5} h={5} as={ChevronRightIcon} />
         </Flex>
       </Stack>
     </Link>
@@ -279,15 +271,15 @@ const NAV_ITEMS: Array<NavItem> = [
         href: "#",
       },
       {
-        label: "Vận chuyển đi các tỉnh",
-        subLabel: "",
+        label: "Vận chuyển ngoại thành",
+        subLabel: "Nhận chuyển hàng đi các tỉnh",
         href: "#",
       },
     ],
   },
   {
-    label: "Sản phẩm",
-    href: "/san-pham",
+    label: "Tra cứu đơn hàng",
+    href: "/tra-cuu",
   },
   {
     label: "Tin tức",
