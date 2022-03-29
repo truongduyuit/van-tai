@@ -16,6 +16,8 @@ const colors = {
     highlight: "#2185d0",
     sub: "#2185d0",
   },
+  btnText: "#fff",
+  btnBg: "#2185d0",
 };
 
 const theme = extendTheme({ colors });

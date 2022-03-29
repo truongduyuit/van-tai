@@ -16,14 +16,14 @@ import { Feature } from ".";
 export const FeatureList: React.FC<BoxProps> = ({ ...props }) => {
   return (
     <Box
-      // shadow="xl"
       bg={useColorModeValue("white", "gray.800")}
       px={8}
       py={20}
       mx="auto"
       border={`1px solid ${useColorModeValue("brand.800", "brand.800")}`}
+      h="100vh"
     >
-      <Container maxW="container.xl">
+      <Container maxW="6xl">
         <SimpleGrid
           alignItems="center"
           columns={{ base: 1, lg: 2 }}
@@ -34,13 +34,13 @@ export const FeatureList: React.FC<BoxProps> = ({ ...props }) => {
             <chakra.h2
               mb={3}
               fontSize={{ base: "3xl", md: "4xl" }}
-              fontWeight="extrabold"
+              fontWeight="bold"
               textAlign={{ base: "center", sm: "left" }}
-              color={useColorModeValue("gray.600", "gray.500")}
+              color="text"
               lineHeight="shorter"
               letterSpacing="tight"
             >
-              Become a Partner
+              Chúng tôi cam kết
             </chakra.h2>
             <chakra.p
               mb={3}
@@ -48,8 +48,9 @@ export const FeatureList: React.FC<BoxProps> = ({ ...props }) => {
               textAlign={{ base: "center", sm: "left" }}
               color={useColorModeValue("gray.600", "gray.500")}
             >
-              Let s put our heads together to build a successful partnership to
-              benefit both your customers and your business.
+              Đem lại trải nghiệm tuyệt vời cho khách hàng bằng những dịch vụ
+              tốt nhất với chi phí hợp lý, đảm bảo chất lượng hàng hóa, nhanh
+              chóng và tiết kiệm, ...
             </chakra.p>
             <Link href="/lien-he" passHref>
               <Button
@@ -57,23 +58,15 @@ export const FeatureList: React.FC<BoxProps> = ({ ...props }) => {
                 variant="solid"
                 w={{ base: "full", sm: "auto" }}
                 size="lg"
-                bgColor={useColorModeValue("gray.500", "gray.500")}
+                bgColor="btnBg"
+                color="btnText"
+                _hover={{
+                  bgColor: "btnText",
+                  color: "btnBg",
+                }}
                 mt={3}
               >
-                Become a Partner
-              </Button>
-            </Link>
-            <Link href="/lien-he" passHref>
-              <Button
-                as="a"
-                variant="solid"
-                w={{ base: "full", sm: "auto" }}
-                size="lg"
-                bgColor={useColorModeValue("gray.500", "gray.500")}
-                mx={{ md: 3 }}
-                mt={3}
-              >
-                Become a Partner
+                Đặt xe ngay
               </Button>
             </Link>
           </Box>
@@ -83,16 +76,13 @@ export const FeatureList: React.FC<BoxProps> = ({ ...props }) => {
             spacing={5}
             alignItems="start"
           >
-            <Feature>Email APIs, SMTP Relay, and Webhooks</Feature>
-            <Feature>Suppression Management</Feature>
-            <Feature>Email Tracking and Analytics</Feature>
-            <Feature>99.99% Guaranteed Uptime SLA</Feature>
-            <Feature>5 Days of Log Retention</Feature>
-            <Feature>Limited 24/7 Ticket Support</Feature>
-            <Feature>1 Dedicated IP (Foundation 100k and up)</Feature>
-            <Feature>1,000 Email Address Validations</Feature>
-            <Feature>Host events together or get your event sponsored</Feature>
-            <Feature>Reach 90,000 customers via our integration page</Feature>
+            <Feature>Thực hiện cam kết như thỏa thuận</Feature>
+            <Feature>Đảm bảo hàng hóa an toàn</Feature>
+            <Feature>Thời gian vận chuyển nhanh, chính xác</Feature>
+            <Feature>Chi phí vận chuyển hợp lý</Feature>
+            <Feature>Chịu trách nhiệm đền bù thiệt hại</Feature>
+            <Feature>Bảo mật thông tin khách hàng</Feature>
+            <Feature>Hỗ trợ yêu cầu phát sinh</Feature>
           </VStack>
         </SimpleGrid>
       </Container>

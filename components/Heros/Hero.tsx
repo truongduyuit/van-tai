@@ -2,6 +2,7 @@ import {
   Box,
   BoxProps,
   chakra,
+  Container,
   SimpleGrid,
   useColorModeValue,
 } from "@chakra-ui/react";
@@ -38,8 +39,8 @@ export const Hero: React.FC<BoxProps> = ({ ...props }) => {
         type="text/javascript"
       ></Script>
 
-      <SimpleGrid columns={{ base: 1, md: 2 }} {...props}>
-        <Box maxW="7xl" mx="auto">
+      <Container maxW="6xl" mx="auto">
+        <SimpleGrid columns={{ base: 1, md: 2 }} {...props}>
           <Box
             pos="relative"
             pb={{ base: 8, sm: 16, md: 20, lg: 28, xl: 32 }}
@@ -48,12 +49,7 @@ export const Hero: React.FC<BoxProps> = ({ ...props }) => {
             zIndex={1}
             border="solid 1px transparent"
           >
-            <Box
-              mx="auto"
-              maxW={{ base: "7xl" }}
-              px={{ base: 4, sm: 6, lg: 8 }}
-              mt={{ base: 10, sm: 12, md: 16, lg: 20, xl: 20 }}
-            >
+            <Box mx="auto" mt={{ base: 10, sm: 12, md: 16, lg: 20 }}>
               <Box
                 w="full"
                 textAlign={{ sm: "center", lg: "left" }}
@@ -143,9 +139,9 @@ export const Hero: React.FC<BoxProps> = ({ ...props }) => {
               </Box>
             </Box>
           </Box>
-        </Box>
-        <Box id="hero_truck"></Box>
-      </SimpleGrid>
+          <Box id="hero_truck" mt={-10}></Box>
+        </SimpleGrid>
+      </Container>
     </>
   );
 };
