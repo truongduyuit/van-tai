@@ -39,7 +39,7 @@ export const Hero: React.FC<BoxProps> = ({ ...props }) => {
         type="text/javascript"
       ></Script>
 
-      <Container maxW="6xl" mx="auto">
+      <Container maxW="7xl" mx="auto">
         <SimpleGrid columns={{ base: 1, md: 2 }} {...props}>
           <Box
             pos="relative"
