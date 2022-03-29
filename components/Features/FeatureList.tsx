@@ -23,7 +23,7 @@ export const FeatureList: React.FC<BoxProps> = ({ ...props }) => {
       border={`1px solid ${useColorModeValue("brand.800", "brand.800")}`}
       h="100vh"
     >
-      <Container maxW="6xl">
+      <Container maxW="7xl">
         <SimpleGrid
           alignItems="center"
           columns={{ base: 1, lg: 2 }}
