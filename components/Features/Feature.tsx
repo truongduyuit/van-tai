@@ -7,7 +7,7 @@ export const Feature: React.FC = ({ ...props }) => {
         boxSize={5}
         mt={1}
         mr={2}
-        color={useColorModeValue("brand.500", "brand.300")}
+        color="#2185d0"
         viewBox="0 0 20 20"
         fill="currentColor"
       >
