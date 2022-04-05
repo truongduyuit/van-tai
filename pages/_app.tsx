@@ -1,6 +1,5 @@
 import { ChakraProvider, extendTheme } from "@chakra-ui/react";
 import type { AppProps } from "next/app";
-import { Layout } from "../components/Layouts/Layout";
 import "../styles/globals.css";
 
 const colors = {
@@ -24,9 +23,7 @@ const theme = extendTheme({ colors });
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <ChakraProvider theme={theme}>
-      <Layout>
         <Component {...pageProps} />
-      </Layout>
     </ChakraProvider>
   );
 }

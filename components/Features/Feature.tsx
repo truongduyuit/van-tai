@@ -1,4 +1,7 @@
-import { chakra, Flex, Icon, useColorModeValue } from "@chakra-ui/react";
+import { Box, chakra, Flex, Icon, useColorModeValue } from "@chakra-ui/react";
+import { useEffect } from "react";
+import lotWeb, { AnimationItem } from "lottie-web";
+import CheckMarkAnimation from "../../animations/check-mark.json";
 
 export const Feature: React.FC = ({ ...props }) => {
   return (
