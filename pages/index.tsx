@@ -24,7 +24,7 @@ const Home: NextPage = () => {
         type="text/javascript"
       ></Script>
 
-      <Layout mx={{ base: 5, md: 14 }}>
+      <Layout mx={{ base: 5, md: 14, lg: 20, xl: 24 }}>
         <Hero mt={{ md: 5 }} />
 
         <FeatureList />
