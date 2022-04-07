@@ -1,14 +1,16 @@
-import { Box } from "@chakra-ui/react";
+import { Box, BoxProps } from "@chakra-ui/react";
 import { Footer } from "../Footers";
 import Navbar from "../Navigations/Navbar";
 import { FacebookPlugin } from "../Socials";
 
-export const Layout: React.FC = ({ children }) => {
+export const Layout: React.FC<BoxProps> = ({ children, ...rest }) => {
   return (
     <>
-      <FacebookPlugin />
-      <Navbar />
-      <Box zIndex={1}>{children}</Box>
+      <Box {...rest}>
+        <FacebookPlugin />
+        <Navbar />
+        <Box zIndex={1}>{children}</Box>
+      </Box>
       <Footer />
     </>
   );

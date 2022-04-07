@@ -1,19 +1,17 @@
+import { PhoneIcon } from "@chakra-ui/icons";
 import {
   Box,
-  chakra,
   Container,
+  IconButton,
+  Input,
   Link,
   SimpleGrid,
   Stack,
   Text,
-  VisuallyHidden,
-  Input,
-  IconButton,
   useColorModeValue,
 } from "@chakra-ui/react";
 import { ReactNode } from "react";
 import { FaInstagram, FaTwitter, FaYoutube } from "react-icons/fa";
-import { BiMailSend } from "react-icons/bi";
 import { Logo, SocialButton } from "..";
 
 const ListHeader = ({ children }: { children: ReactNode }) => {
@@ -28,18 +26,15 @@ type Props = {};
 
 export const Footer: React.FC<Props> = ({ ...props }) => {
   return (
-    <Box
-      bg={useColorModeValue("gray.50", "gray.900")}
-      color={useColorModeValue("gray.700", "gray.200")}
-    >
-      <Container as={Stack} maxW={"6xl"} py={10}>
+    <Box bg="gray.50">
+      <Container as={Stack} maxW={"7xl"} py={10}>
         <SimpleGrid
           templateColumns={{ sm: "1fr 1fr", md: "2fr 1fr 1fr 2fr" }}
           spacing={8}
         >
           <Stack spacing={6}>
             <Box>
-              <Logo color={useColorModeValue("gray.700", "white")} />
+              <Logo />
             </Box>
             <Text fontSize={"sm"}>
               Theo dõi chúng tôi ở các mạng xã hội bên dưới nhé ! Có nhiều hay
@@ -79,20 +74,17 @@ export const Footer: React.FC<Props> = ({ ...props }) => {
             <Stack direction={"row"}>
               <Input
                 placeholder={"Nhập số điện thoại"}
-                bg={useColorModeValue("blackAlpha.100", "whiteAlpha.100")}
                 border={0}
                 _focus={{
                   bg: "whiteAlpha.300",
                 }}
               />
               <IconButton
-                bg={useColorModeValue("green.400", "green.800")}
-                color={useColorModeValue("white", "gray.800")}
                 _hover={{
                   bg: "green.600",
                 }}
                 aria-label="Subscribe"
-                icon={<BiMailSend />}
+                icon={<PhoneIcon />}
               />
             </Stack>
           </Stack>
