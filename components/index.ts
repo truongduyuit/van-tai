@@ -9,3 +9,4 @@ export * from "./Actions";
 export * from "./Footers";
 export * from "./Commons";
 export * from "./Contacts";
+export * from "./Sidebar";
