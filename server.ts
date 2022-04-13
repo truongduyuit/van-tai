@@ -2,7 +2,8 @@ import express, { Request, Response } from "express";
 import next from "next";
 import { loadEnvConfig } from "@next/env";
 loadEnvConfig("./", process.env.NODE_ENV !== "production");
-import { mongo } from "./database";
+
+import { Mongoose } from "./database";
 
 const dev = process.env.NODE_ENV !== "production";
 const app = next({ dev });
@@ -14,7 +15,7 @@ const port = process.env.PORT || 3000;
     await app.prepare();
     const server = express();
 
-    await mongo.init();
+    await Mongoose.init();
     server.all("*", (req: Request, res: Response) => {
       return handle(req, res);
     });

@@ -11,5 +11,5 @@ export default async function handler(
   res: NextApiResponse<Data>
 ) {
   const comment = await CommentFuntions.getOne({});
-  return res.status(200).json({ name: comment.name });
+  return res.status(200).json({ name: comment.account_id });
 }

@@ -4,18 +4,15 @@ import mongoose from "mongoose";
 const connectionString = process.env.MONGO_CONNECTION_STRING ?? "";
 const user = process.env.DB_USER;
 const pass = process.env.DB_PASS;
-console.log("connectionString: ", connectionString);
 
 class Mongoose {
-  private static instance: Mongoose;
-
-  public static getInstance() {
-    return Mongoose.instance || new Mongoose();
-  }
-
-  init(options?: mongoose.ConnectOptions): void {
+  public static init(options?: mongoose.ConnectOptions): void {
     mongoose
-      .connect(connectionString, { user, pass, ...options })
+      .connect(connectionString, {
+        user,
+        pass,
+        ...options,
+      })
       .then(() => {
         console.log(`Connect to db: ${connectionString}`);
       })
@@ -33,6 +30,4 @@ class Mongoose {
   }
 }
 
-const mongo = Mongoose.getInstance();
-Object.freeze(mongo);
-export { mongo };
+export { Mongoose };

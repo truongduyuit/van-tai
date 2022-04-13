@@ -1,1 +1,1 @@
-export * from "./comments.model";
+export * from "./account.model";
