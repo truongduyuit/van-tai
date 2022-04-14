@@ -1,4 +1,4 @@
-export * from "./comment.funtions";
+export * from "./account.functions";
 export * from "./menu.functions";
 export * from "./post.functions";
 export * from "./tag.functions";

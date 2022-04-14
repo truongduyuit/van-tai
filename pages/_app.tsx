@@ -1,5 +1,8 @@
-import { ChakraProvider, extendTheme } from "@chakra-ui/react";
+import { Box, ChakraProvider, extendTheme } from "@chakra-ui/react";
 import type { AppProps } from "next/app";
+import { Provider } from "react-redux";
+import { Loading } from "../components";
+import store from "../redux/store";
 import "../styles/globals.css";
 
 const colors = {
@@ -22,9 +25,22 @@ const colors = {
 const theme = extendTheme({ colors });
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <ChakraProvider theme={theme}>
+    <Provider store={store}>
+      <ChakraProvider theme={theme}>
+        <AppChild Component={Component} pageProps={pageProps} />
+      </ChakraProvider>
+    </Provider>
+  );
+}
+
+function AppChild({ Component, pageProps }: any) {
+  return (
+    <>
+      <Box id="body-container">
         <Component {...pageProps} />
-    </ChakraProvider>
+      </Box>
+      <Loading />
+    </>
   );
 }
 

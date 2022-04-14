@@ -1,8 +1,9 @@
 import {
   Box,
   BoxProps,
-  chakra, SimpleGrid,
-  useColorModeValue
+  chakra,
+  SimpleGrid,
+  useColorModeValue,
 } from "@chakra-ui/react";
 import lotWeb, { AnimationItem } from "lottie-web";
 import Link from "next/link";

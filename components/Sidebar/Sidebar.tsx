@@ -1,28 +1,24 @@
 import {
-  As,
-  Avatar,
-  Box,
-  BoxProps,
-  Collapse,
-  Drawer,
-  DrawerContent,
-  DrawerOverlay,
-  Flex,
-  Icon,
-  IconButton,
-  Input,
-  InputGroup,
-  InputLeftElement,
-  Text,
-  useColorModeValue,
-  useDisclosure,
+    As,
+    Avatar,
+    Box,
+    BoxProps,
+    Collapse,
+    Drawer,
+    DrawerContent,
+    DrawerOverlay,
+    Flex,
+    Icon,
+    IconButton,
+    Input,
+    InputGroup,
+    InputLeftElement, useColorModeValue,
+    useDisclosure
 } from "@chakra-ui/react";
 import React from "react";
-import { AiFillGift } from "react-icons/ai";
-import { BsGearFill } from "react-icons/bs";
-import { FaBell, FaClipboardCheck, FaRss } from "react-icons/fa";
+import { FaBell } from "react-icons/fa";
 import { FiMenu, FiSearch } from "react-icons/fi";
-import { HiCode, HiCollection } from "react-icons/hi";
+import { HiCode } from "react-icons/hi";
 import { MdHome, MdKeyboardArrowRight } from "react-icons/md";
 
 export const Sidebar = () => {
