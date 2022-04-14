@@ -1,30 +1,28 @@
 import mongoose from "mongoose";
 
-export interface ICommentModel extends mongoose.Document {
-  id: mongoose.Types.ObjectId;
-  account_id: string;
-  movie_id: mongoose.Types.ObjectId;
-  limit: number;
-  products: string[];
+export interface IAccountModel extends mongoose.Document {
+  _id: mongoose.Types.ObjectId;
+  phone: string;
+  password: string;
+  name: string;
+  status: boolean;
 }
 
 const schema = new mongoose.Schema({
-  id: {
-    type: mongoose.Types.ObjectId,
+  phone: {
+    type: String,
+    unique: true,
+    required: true,
   },
-  account_id: {
+  password: {
     type: String,
     required: true,
   },
-  limit: {
-    type: Number,
-    required: true,
+  name: String,
+  status: {
+    type: Boolean,
+    default: true,
   },
-  products: [
-    {
-      type: String,
-    },
-  ],
 });
 
-export const CommentModel = mongoose.model<ICommentModel>("accounts", schema);
+export const Account = mongoose.model<IAccountModel>("account", schema);
