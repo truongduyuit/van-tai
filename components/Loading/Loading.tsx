@@ -21,7 +21,7 @@ export function Loading({ isLoading }: { isLoading?: boolean }) {
   }, [loading]);
 
   return (
-    <Portal>
+    <>
       {loading && (
         <Center
           position="fixed"
@@ -30,10 +30,11 @@ export function Loading({ isLoading }: { isLoading?: boolean }) {
           left={0}
           right={0}
           bgColor="rgba(0,0,0,0.25)"
+          zIndex={9999}
         >
           <FadeLoader color="highlight" loading={loading} />
         </Center>
       )}
-    </Portal>
+    </>
   );
 }

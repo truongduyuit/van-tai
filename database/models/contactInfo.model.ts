@@ -15,28 +15,33 @@ export interface IContactInfoModel extends mongoose.Document {
   };
 }
 
-const schema = new mongoose.Schema({
-  phone: {
-    type: String,
-    required: true,
+const schema = new mongoose.Schema(
+  {
+    phone: {
+      type: String,
+      required: true,
+    },
+    email: {
+      type: String,
+    },
+    address: {
+      type: String,
+    },
+    social: {
+      facebook: String,
+      youtube: String,
+      twitter: String,
+      tiktok: String,
+      instagram: String,
+      zalo: String,
+    },
   },
-  email: {
-    type: String,
-  },
-  address: {
-    type: String,
-  },
-  social: {
-    facebook: String,
-    youtube: String,
-    twitter: String,
-    tiktok: String,
-    instagram: String,
-    zalo: String,
-  },
-});
-
-export const ContactInfo = mongoose.model<IContactInfoModel>(
-  "contact_info",
-  schema
+  {
+    collection: "contact_infos",
+    timestamps: true,
+  }
 );
+
+export const ContactInfo =
+  mongoose.models.contact_infos ||
+  mongoose.model<IContactInfoModel>("contact_infos", schema);

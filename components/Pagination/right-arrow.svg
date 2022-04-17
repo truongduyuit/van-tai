@@ -1,0 +1,6 @@
+<svg version="1.1" id="right-arrow-menu" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100%" height="100%"
+	 viewBox="0 0 64 64">
+<path id="right-arrow-menu" class="svg-img" style="fill:#FF5600;" d="M20.57,64c-2.34,0-4.68-0.89-6.46-2.68c-3.57-3.57-3.57-9.36,0-12.93L30.5,32L14.1,15.61
+	c-3.57-3.57-3.57-9.36,0-12.93s9.36-3.57,12.93,0L49.9,25.54c1.71,1.71,2.68,4.04,2.68,6.46s-0.96,4.75-2.68,6.46L27.03,61.32
+	C25.25,63.11,22.91,64,20.57,64z"/>
+</svg>

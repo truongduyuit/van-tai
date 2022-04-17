@@ -11,3 +11,4 @@ export * from "./Commons";
 export * from "./Contacts";
 export * from "./Sidebar";
 export * from "./Loading";
+export * from "./Pagination";

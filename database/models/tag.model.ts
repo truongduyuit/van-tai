@@ -6,15 +6,22 @@ export interface ITagModel extends mongoose.Document {
   status: boolean;
 }
 
-const schema = new mongoose.Schema({
-  name: {
-    type: String,
-    required: true,
+const schema = new mongoose.Schema(
+  {
+    name: {
+      type: String,
+      required: true,
+    },
+    status: {
+      type: Boolean,
+      default: true,
+    },
   },
-  status: {
-    type: Boolean,
-    default: true,
-  },
-});
+  {
+    collection: "tags",
+    timestamps: true,
+  }
+);
 
-export const Tag = mongoose.model<ITagModel>("tag", schema);
+export const Tag =
+  mongoose.models.tags || mongoose.model<ITagModel>("tags", schema);

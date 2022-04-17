@@ -1,71 +1,75 @@
 import {
-    As,
-    Avatar,
-    Box,
-    BoxProps,
-    Collapse,
-    Drawer,
-    DrawerContent,
-    DrawerOverlay,
-    Flex,
-    Icon,
-    IconButton,
-    Input,
-    InputGroup,
-    InputLeftElement, useColorModeValue,
-    useDisclosure
+  As,
+  Avatar,
+  Box,
+  BoxProps,
+  Button,
+  Collapse,
+  Drawer,
+  DrawerContent,
+  DrawerOverlay,
+  Flex,
+  Icon,
+  IconButton,
+  Input,
+  InputGroup,
+  InputLeftElement,
+  Menu,
+  MenuButton,
+  MenuItem,
+  MenuList,
+  useColorModeValue,
+  useDisclosure,
 } from "@chakra-ui/react";
 import React from "react";
-import { FaBell } from "react-icons/fa";
 import { FiMenu, FiSearch } from "react-icons/fi";
 import { HiCode } from "react-icons/hi";
 import { MdHome, MdKeyboardArrowRight } from "react-icons/md";
 
-export const Sidebar = () => {
-  const sidebar = useDisclosure();
-  const integrations = useDisclosure();
+const NavItem: React.FC<
+  {
+    icon?: As<any>;
+  } & BoxProps
+> = ({ ...props }) => {
+  const { icon, children, ...rest } = props;
   const color = useColorModeValue("gray.600", "gray.300");
 
-  const NavItem: React.FC<
-    {
-      icon?: As<any>;
-    } & BoxProps
-  > = ({ ...props }) => {
-    const { icon, children, ...rest } = props;
+  return (
+    <Flex
+      align="center"
+      px="4"
+      pl="4"
+      py="3"
+      cursor="pointer"
+      color={useColorModeValue("inherit", "gray.400")}
+      _hover={{
+        bg: useColorModeValue("gray.100", "gray.900"),
+        color: useColorModeValue("gray.900", "gray.200"),
+      }}
+      role="group"
+      fontWeight="semibold"
+      transition=".15s ease"
+      {...rest}
+    >
+      {icon && (
+        <Icon
+          mx="2"
+          boxSize="4"
+          _groupHover={{
+            color: color,
+          }}
+          as={icon}
+        />
+      )}
+      {children}
+    </Flex>
+  );
+};
 
-    return (
-      <Flex
-        align="center"
-        px="4"
-        pl="4"
-        py="3"
-        cursor="pointer"
-        color={useColorModeValue("inherit", "gray.400")}
-        _hover={{
-          bg: useColorModeValue("gray.100", "gray.900"),
-          color: useColorModeValue("gray.900", "gray.200"),
-        }}
-        role="group"
-        fontWeight="semibold"
-        transition=".15s ease"
-        {...rest}
-      >
-        {icon && (
-          <Icon
-            mx="2"
-            boxSize="4"
-            _groupHover={{
-              color: color,
-            }}
-            as={icon}
-          />
-        )}
-        {children}
-      </Flex>
-    );
-  };
+const SidebarContent: React.FC<BoxProps> = ({ ...props }) => {
+  const integrations = useDisclosure();
 
-  const SidebarContent: React.FC<BoxProps> = ({ ...props }) => (
+  return (
     <Box
       as="nav"
       pos="fixed"
@@ -119,6 +123,10 @@ export const Sidebar = () => {
       </Flex>
     </Box>
   );
+};
+
+export const Sidebar: React.FC = ({ children }) => {
+  const sidebar = useDisclosure();
 
   return (
     <Box
@@ -163,22 +171,33 @@ export const Sidebar = () => {
             <Input placeholder="Search for articles..." />
           </InputGroup>
 
-          <Flex align="center">
-            <Icon color="gray.500" as={FaBell} cursor="pointer" />
-            <Avatar
-              ml="4"
-              size="sm"
-              name="anubra266"
-              src="https://avatars.githubusercontent.com/u/30869823?v=4"
-              cursor="pointer"
-            />
+          <Flex alignItems={"center"}>
+            <Menu>
+              <MenuButton
+                as={Button}
+                rounded={"full"}
+                variant={"link"}
+                cursor={"pointer"}
+                minW={0}
+              >
+                <Avatar
+                  size={"sm"}
+                  src={
+                    "https://images.unsplash.com/photo-1493666438817-866a91353ca9?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=b616b2c5b373a80ffc9636ba24f7a4a9"
+                  }
+                />
+              </MenuButton>
+              <MenuList>
+                <MenuItem>Đăng xuất</MenuItem>
+              </MenuList>
+            </Menu>
           </Flex>
         </Flex>
 
         <Box as="main" p="4">
           {/* Add content here, remove div below  */}
           <Box borderWidth="4px" borderStyle="dashed" rounded="md" h="96">
-            <Box p={5}>Content hire</Box>
+            <Box p={5}>{children}</Box>
           </Box>
         </Box>
       </Box>

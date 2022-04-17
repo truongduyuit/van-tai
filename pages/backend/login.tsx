@@ -7,7 +7,6 @@ import {
   Input,
 } from "@chakra-ui/react";
 import { useState } from "react";
-import bcrypt from "bcryptjs";
 import axios from "axios";
 import { useRouter } from "next/router";
 
@@ -17,18 +16,18 @@ const AdminLoginPage: React.FC = () => {
   const [password, setpassword] = useState<string>("");
 
   const handleAdminLogin = async () => {
-    const result = await axios.post("/admin/login", {
+    const result = await axios.post("/api/admin/login", {
       phone,
       password,
     });
 
-    const { status, data } = result.data;
-    if (result.data && status) {
+    const { success, data } = result.data;
+    if (result.data && success) {
       const { accessToken, refreshToken } = data;
       localStorage.setItem("access_token", accessToken);
       localStorage.setItem("refresh_token", refreshToken);
 
-      router.push("/admin/dashboard");
+      router.push("/backend");
     }
   };
 

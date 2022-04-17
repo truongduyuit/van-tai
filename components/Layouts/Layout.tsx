@@ -7,7 +7,7 @@ export const Layout: React.FC<BoxProps> = ({ children, ...rest }) => {
   return (
     <>
       <Box {...rest}>
-        <FacebookPlugin />
+        {/* <FacebookPlugin /> */}
         <Navbar />
         <Box zIndex={1}>{children}</Box>
       </Box>

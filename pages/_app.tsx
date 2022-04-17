@@ -35,12 +35,10 @@ function MyApp({ Component, pageProps }: AppProps) {
 
 function AppChild({ Component, pageProps }: any) {
   return (
-    <>
-      <Box id="body-container">
-        <Component {...pageProps} />
-      </Box>
+    <Box id="body-container">
+      <Component {...pageProps} />
       <Loading />
-    </>
+    </Box>
   );
 }
 

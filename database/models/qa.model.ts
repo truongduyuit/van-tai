@@ -7,21 +7,28 @@ export interface IQAModel extends mongoose.Document {
   status: boolean;
 }
 
-const schema = new mongoose.Schema({
-  question: {
-    type: String,
-    unique: true,
-    required: true,
+const schema = new mongoose.Schema(
+  {
+    question: {
+      type: String,
+      unique: true,
+      required: true,
+    },
+    answer: {
+      type: String,
+      unique: true,
+      required: true,
+    },
+    status: {
+      type: Boolean,
+      default: true,
+    },
   },
-  answer: {
-    type: String,
-    unique: true,
-    required: true,
-  },
-  status: {
-    type: Boolean,
-    default: true,
-  },
-});
+  {
+    collection: "qas",
+    timestamps: true,
+  }
+);
 
-export const QA = mongoose.model<IQAModel>("qa", schema);
+export const QA =
+  mongoose.models.qas || mongoose.model<IQAModel>("qas", schema);
