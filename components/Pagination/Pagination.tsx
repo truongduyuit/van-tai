@@ -93,16 +93,16 @@ const Pagination = ({
         padding="1rem"
         fontSize="1rem"
         fontWeight="bold"
-        background="var(--main-bg-color)"
         minWidth="1rem"
         {...(isActive(pageNo)
           ? {
-              color: "var(--main-color)",
-              boxShadow: "var(--box-shadow-input)",
+              bgColor: "#81E6D9",
+              _hover: {
+                bgColor: "#319795",
+              },
               ...activeButtonProps,
             }
           : {
-              color: "var(--primary-text-color)",
               ...inactiveButtonProps,
             })}
         onClick={() => {

@@ -1,28 +1,17 @@
 import {
   As,
-  Avatar,
   Box,
   BoxProps,
-  Button,
   Collapse,
   Drawer,
   DrawerContent,
   DrawerOverlay,
   Flex,
   Icon,
-  IconButton,
-  Input,
-  InputGroup,
-  InputLeftElement,
-  Menu,
-  MenuButton,
-  MenuItem,
-  MenuList,
   useColorModeValue,
   useDisclosure,
 } from "@chakra-ui/react";
 import React from "react";
-import { FiMenu, FiSearch } from "react-icons/fi";
 import { HiCode } from "react-icons/hi";
 import { MdHome, MdKeyboardArrowRight } from "react-icons/md";
 
@@ -32,7 +21,6 @@ const NavItem: React.FC<
   } & BoxProps
 > = ({ ...props }) => {
   const { icon, children, ...rest } = props;
-  const color = useColorModeValue("gray.600", "gray.300");
 
   return (
     <Flex
@@ -41,10 +29,10 @@ const NavItem: React.FC<
       pl="4"
       py="3"
       cursor="pointer"
-      color={useColorModeValue("inherit", "gray.400")}
+      color="gray.400"
       _hover={{
-        bg: useColorModeValue("gray.100", "gray.900"),
-        color: useColorModeValue("gray.900", "gray.200"),
+        bg: "gray.900",
+        color: "gray.200",
       }}
       role="group"
       fontWeight="semibold"
@@ -56,7 +44,7 @@ const NavItem: React.FC<
           mx="2"
           boxSize="4"
           _groupHover={{
-            color: color,
+            color: "gray.300",
           }}
           as={icon}
         />
@@ -80,8 +68,6 @@ const SidebarContent: React.FC<BoxProps> = ({ ...props }) => {
       pb="10"
       overflowX="hidden"
       overflowY="auto"
-      bg={useColorModeValue("white", "gray.800")}
-      borderColor={useColorModeValue("inherit", "gray.700")}
       borderRightWidth="1px"
       w="60"
       {...props}
@@ -126,81 +112,17 @@ const SidebarContent: React.FC<BoxProps> = ({ ...props }) => {
 };
 
 export const Sidebar: React.FC = ({ children }) => {
-  const sidebar = useDisclosure();
+  const { isOpen, onClose, onOpen } = useDisclosure();
 
   return (
-    <Box
-      as="section"
-      bg={useColorModeValue("gray.50", "gray.700")}
-      minH="100vh"
-    >
+    <>
       <SidebarContent display={{ base: "none", md: "unset" }} />
-      <Drawer
-        isOpen={sidebar.isOpen}
-        onClose={sidebar.onClose}
-        placement="left"
-      >
+      <Drawer isOpen={isOpen} onClose={onClose} placement="left">
         <DrawerOverlay />
         <DrawerContent>
           <SidebarContent w="full" borderRight="none" />
         </DrawerContent>
       </Drawer>
-      <Box ml={{ base: 0, md: 60 }} transition=".3s ease">
-        <Flex
-          as="header"
-          align="center"
-          justify="space-between"
-          w="full"
-          px="4"
-          bg={useColorModeValue("white", "gray.800")}
-          borderBottomWidth="1px"
-          borderColor={useColorModeValue("inherit", "gray.700")}
-          h="14"
-        >
-          <IconButton
-            aria-label="Menu"
-            display={{ base: "inline-flex", md: "none" }}
-            onClick={sidebar.onOpen}
-            icon={<FiMenu />}
-            size="sm"
-          />
-          <InputGroup w="96" display={{ base: "none", md: "flex" }}>
-            <InputLeftElement color="gray.500">
-              <FiSearch />
-            </InputLeftElement>
-            <Input placeholder="Search for articles..." />
-          </InputGroup>
-
-          <Flex alignItems={"center"}>
-            <Menu>
-              <MenuButton
-                as={Button}
-                rounded={"full"}
-                variant={"link"}
-                cursor={"pointer"}
-                minW={0}
-              >
-                <Avatar
-                  size={"sm"}
-                  src={
-                    "https://images.unsplash.com/photo-1493666438817-866a91353ca9?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=b616b2c5b373a80ffc9636ba24f7a4a9"
-                  }
-                />
-              </MenuButton>
-              <MenuList>
-                <MenuItem>Đăng xuất</MenuItem>
-              </MenuList>
-            </Menu>
-          </Flex>
-        </Flex>
-
-        <Box as="main" p="4">
-          {/* Add content here, remove div below  */}
-          <Box borderWidth="4px" borderStyle="dashed" rounded="md" h="96">
-            <Box p={5}>{children}</Box>
-          </Box>
-        </Box>
-      </Box>
-    </Box>
+    </>
   );
 };

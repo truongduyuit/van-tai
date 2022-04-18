@@ -14,3 +14,13 @@ export const SERVICE_CREATE_FAIL: ResponseError = {
   code: "SERVICE_CREATE_FAIL",
   message: "Create service failed",
 };
+
+export const SERVICE_EDIT_FAIL: ResponseError = {
+  code: "SERVICE_EDIT_FAIL",
+  message: "Edit service failed",
+};
+
+export const SERVICE_DELETE_FAIL: ResponseError = {
+  code: "SERVICE_DELETE_FAIL",
+  message: "Edit service failed",
+};

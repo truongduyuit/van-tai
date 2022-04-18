@@ -1,12 +1,16 @@
 import { Box } from "@chakra-ui/react";
+import { Sidebar } from "../Sidebar";
 
 const AdminLayout: React.FC = ({ children }) => {
   return (
     <Box as="section" bg="#fff" minH="100vh">
-      <Box as="main" p="4">
-        {/* Add content here, remove div below  */}
-        <Box borderWidth="4px" borderStyle="dashed" rounded="md" h="96">
-          <Box p={5}>{children}</Box>
+      <Sidebar />
+
+      <Box ml={{ base: 0, md: 60 }} transition=".3s ease">
+        <Box as="main" p="4">
+          <Box borderWidth="4px" borderStyle="dashed" rounded="md">
+            <Box p={5}>{children}</Box>
+          </Box>
         </Box>
       </Box>
     </Box>

@@ -8,3 +8,10 @@ export type ResponseValue = {
   data?: any;
   error?: ResponseError;
 };
+
+export type Metadata = {
+  totalPage: number;
+  totalRecord: number;
+  currentPage: number;
+  limit: number;
+};
