@@ -6,9 +6,11 @@ loadEnvConfig("./", process.env.NODE_ENV !== "production");
 import { Mongoose } from "./database";
 
 const dev = process.env.NODE_ENV !== "production";
-const app = next({ dev });
+const hostname = dev ? "localhost" : "localhost";
+const port = process.env.PORT ? +process.env.PORT : 3000;
+
+const app = next({ dev, port, hostname });
 const handle = app.getRequestHandler();
-const port = process.env.PORT || 3000;
 
 (async () => {
   try {

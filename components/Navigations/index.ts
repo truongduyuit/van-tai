@@ -1,2 +1,2 @@
-export * from "./Hotline"
-export * from "./Navbar"
+export * from "./Hotline";
+export * from "./Navbar";

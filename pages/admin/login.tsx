@@ -9,6 +9,7 @@ import {
 import { useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/router";
+import { AdminPagePath } from "../../contants/pagePath";
 
 const AdminLoginPage: React.FC = () => {
   const router = useRouter();
@@ -27,7 +28,7 @@ const AdminLoginPage: React.FC = () => {
       localStorage.setItem("access_token", accessToken);
       localStorage.setItem("refresh_token", refreshToken);
 
-      router.push("/backend");
+      router.push(`/admin/${AdminPagePath.dashboard}`);
     }
   };
 

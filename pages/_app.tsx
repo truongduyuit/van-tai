@@ -5,24 +5,20 @@ import { Loading } from "../components";
 import store from "../redux/store";
 import "../styles/globals.css";
 
-const colors = {
-  light: {
-    bg: "#fff",
-    text: "#1A202C",
-    highlight: "#2185d0",
-    sub: "#2185d0",
+const theme = extendTheme({
+  semanticTokens: {
+    colors: {
+      bg: "#F3F2F5",
+      primary: "#319795",
+      secondary: "#285E61",
+      textPrimary: "#000",
+      textSecondary: "#fff",
+      warning: "#ffc107",
+      danger: "#dc3545",
+    },
   },
-  dark: {
-    bg: "#1A202C",
-    text: "#fff",
-    highlight: "#2185d0",
-    sub: "#2185d0",
-  },
-  btnText: "#fff",
-  btnBg: "#2185d0",
-};
+});
 
-const theme = extendTheme({ colors });
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <Provider store={store}>

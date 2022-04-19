@@ -8,49 +8,48 @@ import {
   DrawerOverlay,
   Flex,
   Icon,
-  useColorModeValue,
   useDisclosure,
 } from "@chakra-ui/react";
+import Link from "next/link";
 import React from "react";
-import { HiCode } from "react-icons/hi";
-import { MdHome, MdKeyboardArrowRight } from "react-icons/md";
+import { FaArrowRight, FaHome, FaTruckMoving } from "react-icons/fa";
+import { useSelector } from "react-redux";
+import { AdminPagePath } from "../../contants/pagePath";
+import { RootState } from "../../redux/store";
 
 const NavItem: React.FC<
   {
     icon?: As<any>;
+    url: string;
   } & BoxProps
 > = ({ ...props }) => {
-  const { icon, children, ...rest } = props;
+  const { icon, url, children, ...rest } = props;
+
+  const _page = useSelector((state: RootState) => state.page.name);
 
   return (
-    <Flex
-      align="center"
-      px="4"
-      pl="4"
-      py="3"
-      cursor="pointer"
-      color="gray.400"
-      _hover={{
-        bg: "gray.900",
-        color: "gray.200",
-      }}
-      role="group"
-      fontWeight="semibold"
-      transition=".15s ease"
-      {...rest}
-    >
-      {icon && (
-        <Icon
-          mx="2"
-          boxSize="4"
-          _groupHover={{
-            color: "gray.300",
-          }}
-          as={icon}
-        />
-      )}
-      {children}
-    </Flex>
+    <Link href={url} passHref>
+      <Flex
+        align="center"
+        px="4"
+        pl="4"
+        py="3"
+        cursor="pointer"
+        bgColor={url === _page ? "secondary" : "primary"}
+        _hover={{
+          bgColor: "secondary",
+        }}
+        role="group"
+        fontWeight="semibold"
+        transition=".15s ease"
+        borderTopRightRadius=".5rem"
+        borderBottomRightRadius=".5rem"
+        {...rest}
+      >
+        {icon && <Icon mx="2" boxSize="4" as={icon} />}
+        {children}
+      </Flex>
+    </Link>
   );
 };
 
@@ -70,6 +69,8 @@ const SidebarContent: React.FC<BoxProps> = ({ ...props }) => {
       overflowY="auto"
       borderRightWidth="1px"
       w="60"
+      bgColor="primary"
+      color="#fff"
       {...props}
     >
       <Flex px="4" py="5" align="center">
@@ -79,30 +80,43 @@ const SidebarContent: React.FC<BoxProps> = ({ ...props }) => {
         direction="column"
         as="nav"
         fontSize="sm"
-        color="gray.600"
         aria-label="Main Navigation"
       >
-        <NavItem icon={MdHome}>Bảng điều khiển</NavItem>
-        <NavItem icon={MdHome}>Dịch vụ</NavItem>
-        <NavItem icon={MdHome}>Bài viết</NavItem>
-        <NavItem icon={MdHome}>Đơn vận chuyển</NavItem>
-        <NavItem icon={MdHome}>Liên hệ</NavItem>
-        <NavItem icon={HiCode} onClick={integrations.onToggle}>
+        <NavItem icon={FaHome} url={AdminPagePath.dashboard}>
+          Bảng điều khiển
+        </NavItem>
+        <NavItem icon={FaTruckMoving} url={AdminPagePath.service}>
+          Dịch vụ
+        </NavItem>
+        <NavItem icon={FaHome} url={AdminPagePath.dashboard}>
+          Bài viết
+        </NavItem>
+        <NavItem icon={FaHome} url={AdminPagePath.dashboard}>
+          Đơn vận chuyển
+        </NavItem>
+        <NavItem icon={FaHome} url={AdminPagePath.dashboard}>
+          Liên hệ
+        </NavItem>
+        <NavItem
+          icon={FaHome}
+          onClick={integrations.onToggle}
+          url={AdminPagePath.dashboard}
+        >
           Integrations
           <Icon
-            as={MdKeyboardArrowRight}
+            as={FaArrowRight}
             ml="auto"
             transform={integrations.isOpen ? "rotate(90deg)" : "auto"}
           />
         </NavItem>
         <Collapse in={integrations.isOpen}>
-          <NavItem pl="12" py="2">
+          <NavItem pl="12" py="2" url={AdminPagePath.dashboard}>
             Shopify
           </NavItem>
-          <NavItem pl="12" py="2">
+          <NavItem pl="12" py="2" url={AdminPagePath.dashboard}>
             Slack
           </NavItem>
-          <NavItem pl="12" py="2">
+          <NavItem pl="12" py="2" url={AdminPagePath.dashboard}>
             Zapier
           </NavItem>
         </Collapse>
@@ -111,9 +125,10 @@ const SidebarContent: React.FC<BoxProps> = ({ ...props }) => {
   );
 };
 
-export const Sidebar: React.FC = ({ children }) => {
-  const { isOpen, onClose, onOpen } = useDisclosure();
-
+export const Sidebar: React.FC<{
+  isOpen: boolean;
+  onClose: () => void;
+}> = ({ isOpen, onClose }) => {
   return (
     <>
       <SidebarContent display={{ base: "none", md: "unset" }} />
