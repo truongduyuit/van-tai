@@ -15,3 +15,10 @@ export type Metadata = {
   currentPage: number;
   limit: number;
 };
+
+export const MetadataDefault: Metadata = {
+  currentPage: 0,
+  totalPage: 0,
+  limit: 10,
+  totalRecord: 0,
+};

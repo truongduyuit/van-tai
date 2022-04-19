@@ -1,7 +1,7 @@
 import { NextPage, NextPageContext } from "next";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import ServicePage from "../../components/adminSide/servicePage/servicePage";
+import { PostPage, ServicePage } from "../../components";
 import { AdminPagePath } from "../../contants/pagePath";
 import { ServiceFuntions } from "../../database";
 import { setPageName } from "../../redux/pageSlide";
@@ -15,6 +15,9 @@ const handlePage = (page: string, params: any) => {
   switch (page) {
     case AdminPagePath.service: {
       return <ServicePage {...params} />;
+    }
+    case AdminPagePath.post: {
+      return <PostPage {...params} />;
     }
     default: {
       return <>This is {page} page</>;
@@ -50,6 +53,9 @@ export const getServerSideProps = async (context: NextPageContext) => {
         },
       });
       params = { ...params, services };
+      break;
+    }
+    case AdminPagePath.post: {
       break;
     }
     case AdminPagePath.dashboard: {

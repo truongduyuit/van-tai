@@ -1,13 +1,14 @@
 import mongoose from "mongoose";
-import { IAccountModel, ITagModel } from ".";
+import { IAccountModel } from ".";
 
 export interface IPostModel extends mongoose.Document {
-  _id: mongoose.Types.ObjectId;
+  _id: string;
   title: string;
+  description: string;
   url: string;
-  banner: string;
-  tags: ITagModel[];
-  creator: IAccountModel[];
+  content: string;
+  tags: string[];
+  creator: IAccountModel;
   timestamp: Date;
   status: boolean;
 }
@@ -18,13 +19,16 @@ const schema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    description: {
+      type: String,
+    },
     url: {
       type: String,
     },
-    banner: {
+    content: {
       type: String,
     },
-    tags: [{ type: mongoose.Types.ObjectId, ref: "tag" }],
+    tags: [{ type: String }],
     creator: { type: mongoose.Types.ObjectId, ref: "account" },
     timestamp: {
       type: Date,

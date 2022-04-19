@@ -24,7 +24,7 @@ import axios from "axios";
 import { NextPage } from "next";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { Metadata } from "../../../contants";
+import { Metadata, MetadataDefault } from "../../../contants";
 import { IServiceModel } from "../../../database";
 import { setLoading, setOpenModal } from "../../../redux/appSlide";
 import { AdminLayout } from "../../Layouts/AdminLayout";
@@ -38,12 +38,11 @@ interface Service {
 
 interface Props {
   services?: Service;
-  page?: string;
 }
 
 const LIMIT_RECORDS = 10;
 
-const ServicePage: NextPage<Props> = ({ services, page }) => {
+const ServicePage: NextPage<Props> = ({ services }) => {
   const toast = useToast();
   const dispatch = useDispatch();
 
@@ -53,12 +52,7 @@ const ServicePage: NextPage<Props> = ({ services, page }) => {
     services?.records ?? []
   );
   const [metadata, setMetadata] = useState<Metadata>(
-    services?.metadata ?? {
-      currentPage: 0,
-      totalPage: 0,
-      limit: 10,
-      totalRecord: 0,
-    }
+    services?.metadata ?? MetadataDefault
   );
 
   const getData = async (page: number, limit: number, options?: any) => {
@@ -160,7 +154,7 @@ const ServicePage: NextPage<Props> = ({ services, page }) => {
               {currentRecords.map((record: IServiceModel) => {
                 const { _id, name, description, path, status } = record;
                 return (
-                  <Tr key={name}>
+                  <Tr key={_id}>
                     <Td>{name}</Td>
                     <Td>{description}</Td>
                     <Td>{path}</Td>
@@ -233,4 +227,4 @@ const ServicePage: NextPage<Props> = ({ services, page }) => {
   );
 };
 
-export default ServicePage;
+export { ServicePage };

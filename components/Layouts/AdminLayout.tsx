@@ -44,7 +44,7 @@ const AdminLayout: React.FC<{ name?: string; page?: string }> = ({
             size="sm"
           />
 
-          <Flex align="center" justify="flex-end">
+          <Flex align="center" justify="flex-end" w="full">
             <Menu>
               <MenuButton
                 py={2}

@@ -12,7 +12,7 @@ import {
 } from "@chakra-ui/react";
 import Link from "next/link";
 import React from "react";
-import { FaArrowRight, FaHome, FaTruckMoving } from "react-icons/fa";
+import { FaArrowRight, FaHome, FaTruckMoving, FaFilePdf } from "react-icons/fa";
 import { useSelector } from "react-redux";
 import { AdminPagePath } from "../../contants/pagePath";
 import { RootState } from "../../redux/store";
@@ -88,7 +88,7 @@ const SidebarContent: React.FC<BoxProps> = ({ ...props }) => {
         <NavItem icon={FaTruckMoving} url={AdminPagePath.service}>
           Dịch vụ
         </NavItem>
-        <NavItem icon={FaHome} url={AdminPagePath.dashboard}>
+        <NavItem icon={FaFilePdf} url={AdminPagePath.post}>
           Bài viết
         </NavItem>
         <NavItem icon={FaHome} url={AdminPagePath.dashboard}>

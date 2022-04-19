@@ -12,3 +12,4 @@ export * from "./Contacts";
 export * from "./Sidebar";
 export * from "./Loading";
 export * from "./Pagination";
+export * from "./adminSide";
