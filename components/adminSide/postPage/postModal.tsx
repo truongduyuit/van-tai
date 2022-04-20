@@ -12,13 +12,13 @@ import {
   ModalOverlay,
   useToast,
 } from "@chakra-ui/react";
-import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { IPostModel } from "../../../database";
 import { setLoading, setOpenModal } from "../../../redux/appSlide";
 import { RootState } from "../../../redux/store";
+import { Editor } from "../../Editor/Editor";
 
 interface Props {
   record?: IPostModel;
@@ -81,7 +81,6 @@ const PostModal: React.FC<Props> = ({ record }) => {
         isClosable: true,
         position: "bottom-right",
       });
-      onFinish?.();
     } else {
       toast({
         title: isEdit ? "Chỉnh sửa dịch vụ thất bại" : "Thêm dịch vụ thất bại",
@@ -143,6 +142,11 @@ const PostModal: React.FC<Props> = ({ record }) => {
 
           <FormControl isRequired my={5}>
             <FormLabel htmlFor="post-tags">Nội dung bài viết</FormLabel>
+            <Editor
+              name="content"
+              value={content}
+              onChange={(data) => setContent(content)}
+            />
             <Input
               id="editor"
               value={content}
