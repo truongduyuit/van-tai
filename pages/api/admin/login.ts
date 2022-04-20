@@ -35,11 +35,13 @@ export default async function handler(
     success: true,
     data: {
       accessToken: generateAccessToken({
+        _id: adminAccount._id,
         phone,
         name: adminAccount.name,
         role: AccountRoles.admin,
       }),
       refreshToken: generateRefreshToken({
+        _id: adminAccount._id,
         phone,
         name: adminAccount.name,
         role: AccountRoles.admin,

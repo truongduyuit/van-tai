@@ -9,7 +9,6 @@ export interface IPostModel extends mongoose.Document {
   content: string;
   tags: string[];
   creator: IAccountModel;
-  timestamp: Date;
   status: boolean;
 }
 
@@ -30,10 +29,6 @@ const schema = new mongoose.Schema(
     },
     tags: [{ type: String }],
     creator: { type: mongoose.Types.ObjectId, ref: "account" },
-    timestamp: {
-      type: Date,
-      default: Date.now(),
-    },
     status: {
       type: Boolean,
       default: true,

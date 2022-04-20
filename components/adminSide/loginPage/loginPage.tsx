@@ -9,9 +9,9 @@ import {
 import { useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/router";
-import { AdminPagePath } from "../../contants/pagePath";
+import { AdminPagePath } from "../../../contants/pagePath";
 
-const AdminLoginPage: React.FC = () => {
+const LoginPage: React.FC = () => {
   const router = useRouter();
   const [phone, setPhone] = useState<string>("");
   const [password, setpassword] = useState<string>("");
@@ -64,4 +64,4 @@ const AdminLoginPage: React.FC = () => {
   );
 };
 
-export default AdminLoginPage;
+export { LoginPage };

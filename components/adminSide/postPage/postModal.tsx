@@ -19,6 +19,9 @@ import { IPostModel } from "../../../database";
 import { setLoading, setOpenModal } from "../../../redux/appSlide";
 import { RootState } from "../../../redux/store";
 import { Editor } from "../../Editor/Editor";
+import ReactTagInput from "@pathofdev/react-tag-input";
+import "@pathofdev/react-tag-input/build/index.css";
+import { removeVI } from "jsrmvi";
 
 interface Props {
   record?: IPostModel;
@@ -31,11 +34,11 @@ const PostModal: React.FC<Props> = ({ record }) => {
     (state: RootState) => state.app.modalOpened
   );
 
-  const [isEdit, setIsEdit] = useState<boolean>();
+  const [isEdit, setIsEdit] = useState<boolean>(false);
   const [title, setTitle] = useState<string>();
   const [description, setDescription] = useState<string>();
-  const [content, setContent] = useState<string>();
-  const [tags, setTags] = useState<string[]>();
+  const [content, setContent] = useState<string>("");
+  const [tags, setTags] = useState<string[]>([]);
 
   useEffect(() => {
     if (record) {
@@ -52,48 +55,70 @@ const PostModal: React.FC<Props> = ({ record }) => {
       setContent("");
       setTags([]);
     }
-
-    // ClassicEditor.create(document.querySelector("#editor"));
-  }, [record]);
-
-  useEffect(() => {}, [_isModalOpened]);
+  }, [_isModalOpened, record]);
 
   const handleCreateOrEditPost = async () => {
     dispatch(setLoading(true));
 
-    const result = isEdit
-      ? await axios.put("/api/service", {
-          _id: record?._id.toString(),
-          name,
-        })
-      : await axios.post("/api/service", {
-          name,
-        });
+    const accessToken = localStorage.getItem("access_token");
+    const url = removeVI(title);
 
-    const { success, data, error } = result?.data;
-    if (success && data) {
-      toast({
-        title: isEdit
-          ? "Chỉnh sửa dịch vụ thành công"
-          : "Thêm dịch vụ thành công",
-        status: "success",
-        duration: 5000,
-        isClosable: true,
-        position: "bottom-right",
-      });
-    } else {
-      toast({
-        title: isEdit ? "Chỉnh sửa dịch vụ thất bại" : "Thêm dịch vụ thất bại",
-        description: error.message,
-        status: "error",
-        duration: 5000,
-        isClosable: true,
-        position: "bottom-right",
-      });
-    }
+    const result = isEdit
+      ? await axios.put(
+          "/api/post",
+          {
+            _id: record?._id.toString(),
+            title,
+            description,
+            content,
+            tags,
+            url,
+          },
+          {
+            headers: {
+              Authorization: "Bearer " + accessToken,
+            },
+          }
+        )
+      : await axios.post(
+          "/api/post",
+          {
+            title,
+            description,
+            content,
+            tags,
+            url,
+          },
+          {
+            headers: {
+              Authorization: "Bearer " + accessToken,
+            },
+          }
+        );
+
+    const { success, data } = result?.data;
+    if (success && data) showToast(isEdit, true);
+    else showToast(isEdit, false);
 
     dispatch(setLoading(false));
     dispatch(setOpenModal(false));
+  };
+
+  const showToast = (isEdit: boolean, success: boolean) => {
+    const title = success
+      ? isEdit
+        ? "Chỉnh sửa bài viết thành công"
+        : "Thêm bài viết thành công"
+      : isEdit
+      ? "Chỉnh sửa bài viết thất bại"
+      : "Thêm bài viết thất bại";
+    toast({
+      title,
+      status: success ? "success" : "error",
+      duration: 5000,
+      isClosable: true,
+      position: "bottom-right",
+    });
   };
 
   return (
@@ -131,12 +156,10 @@ const PostModal: React.FC<Props> = ({ record }) => {
 
           <FormControl isRequired>
             <FormLabel htmlFor="post-tags">Gắn thẻ</FormLabel>
-            <Input
-              id="post-tags"
+            <ReactTagInput
               placeholder="Nhập tên thẻ"
-              value={tags}
-              //   onChange={(e) => setTags(e.target.value)}
-              disabled
+              tags={tags}
+              onChange={(newTags) => setTags(newTags)}
             />
           </FormControl>
 
@@ -145,15 +168,11 @@ const PostModal: React.FC<Props> = ({ record }) => {
             <Editor
               name="content"
               value={content}
-              onChange={(data) => setContent(content)}
-            />
-            <Input
-              id="editor"
-              value={content}
-              onChange={(e) => setContent(e.target.value)}
-              disabled
+              onChange={(data) => setContent(data)}
             />
           </FormControl>
+
+          <div>{content}</div>
         </ModalBody>
 
         <ModalFooter>

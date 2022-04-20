@@ -50,7 +50,7 @@ const ServiceModal: React.FC<Props> = ({ record, onFinish }) => {
       setDescription("");
       setPath("");
     }
-  }, [record]);
+  }, [_isModalOpened, record]);
 
   const hanleChangeServiceName = (e: ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;

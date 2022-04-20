@@ -16,6 +16,7 @@
     "@ckeditor/ckeditor5-react": "^5.0.0",
     "@emotion/react": "^11",
     "@emotion/styled": "^11",
+    "@pathofdev/react-tag-input": "^1.0.7",
     "@reduxjs/toolkit": "^1.8.1",
     "@types/axios": "^0.14.0",
     "axios": "^0.26.1",
