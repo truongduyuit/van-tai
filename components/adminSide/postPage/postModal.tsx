@@ -25,9 +25,10 @@ import { removeVI } from "jsrmvi";
 
 interface Props {
   record?: IPostModel;
+  onFinish?: () => void;
 }
 
-const PostModal: React.FC<Props> = ({ record }) => {
+const PostModal: React.FC<Props> = ({ record, onFinish }) => {
   const toast = useToast();
   const dispatch = useDispatch();
   const _isModalOpened = useSelector(
@@ -97,8 +98,10 @@ const PostModal: React.FC<Props> = ({ record }) => {
         );
 
     const { success, data } = result?.data;
-    if (success && data) showToast(isEdit, true);
-    else showToast(isEdit, false);
+    if (success && data) {
+      showToast(isEdit, true);
+      onFinish?.();
+    } else showToast(isEdit, false);
 
     dispatch(setLoading(false));
     dispatch(setOpenModal(false));
@@ -171,8 +174,6 @@ const PostModal: React.FC<Props> = ({ record }) => {
               onChange={(data) => setContent(data)}
             />
           </FormControl>
-
-          <div>{content}</div>
         </ModalBody>
 
         <ModalFooter>

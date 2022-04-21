@@ -10,57 +10,57 @@ export default async function handler(
   res: NextApiResponse<ResponseValue>
 ) {
   try {
-    const { _id, title, description, url, content, tags, creator } = req.body;
+    const { _id, title, description, url, content, tags } = req.body;
+    const admin_id = req.cookies["admin_id"];
     let post = {};
-    // switch (req.method) {
-    //   case "PUT": {
-    //     post = await PostFuntions.updateById(_id, {
-    //       title,
-    //       description,
-    //       url,
-    //       content,
-    //       tags,
-    //       creator,
-    //     });
-    //     break;
-    //   }
+    switch (req.method) {
+      case "PUT": {
+        post = await PostFuntions.updateById(_id, {
+          title,
+          description,
+          url,
+          content,
+          tags,
+          creator: admin_id,
+        });
+        break;
+      }
 
-    //   case "DELETE": {
-    //     post = await PostFuntions.updateById(_id, {
-    //       status: false,
-    //     });
-    //     break;
-    //   }
+      case "DELETE": {
+        post = await PostFuntions.updateById(_id, {
+          status: false,
+        });
+        break;
+      }
 
-    //   case "POST": {
-    //     post = await PostFuntions.create({
-    //       title,
-    //       description,
-    //       url,
-    //       content,
-    //       tags,
-    //       creator,
-    //     });
-    //     break;
-    //   }
+      case "POST": {
+        post = await PostFuntions.create({
+          title,
+          description,
+          url,
+          content,
+          tags,
+          creator: admin_id,
+        });
+        break;
+      }
 
-    //   case "GET": {
-    //     const { page = "0", limit = "10", status = true } = req.query;
-    //     post = await PostFuntions.getByQuery({
-    //       query: {
-    //         status,
-    //       },
-    //       page: +page,
-    //       limit: +limit,
-    //       sort: {
-    //         updatedAt: -1,
-    //       },
-    //     });
-    //     break;
-    //   }
-    // }
+      case "GET": {
+        const { page = "0", limit = "10", status = true } = req.query;
+        post = await PostFuntions.getByQuery({
+          query: {
+            status,
+          },
+          page: +page,
+          limit: +limit,
+          sort: {
+            updatedAt: -1,
+          },
+        });
+        break;
+      }
+    }
 
-    // console.log("req.body: ", req.body, req.cookies.admin_id);
     return res.status(200).json({ success: true, data: post });
   } catch (error) {
     switch (req.method) {

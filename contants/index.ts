@@ -22,3 +22,5 @@ export const MetadataDefault: Metadata = {
   limit: 10,
   totalRecord: 0,
 };
+
+export const LIMIT_RECORDS = 10;

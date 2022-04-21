@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { LoginPage, PostPage, ServicePage } from "../../components";
 import { AdminPagePath } from "../../contants/pagePath";
-import { ServiceFuntions } from "../../database";
+import { PostFuntions, ServiceFuntions } from "../../database";
 import { setPageName } from "../../redux/pageSlide";
 
 interface Props {
@@ -59,6 +59,17 @@ export const getServerSideProps = async (context: NextPageContext) => {
       break;
     }
     case AdminPagePath.post: {
+      const posts = await PostFuntions.getByQuery({
+        query: {
+          status: true,
+        },
+        page: 0,
+        limit: process.env.LIMIT_RECORDS ? +process.env.LIMIT_RECORDS : 10,
+        sort: {
+          createdAt: -1,
+        },
+      });
+      params = { ...params, posts };
       break;
     }
     case AdminPagePath.dashboard: {

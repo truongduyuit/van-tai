@@ -24,7 +24,7 @@ import axios from "axios";
 import { NextPage } from "next";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { Metadata, MetadataDefault } from "../../../contants";
+import { LIMIT_RECORDS, Metadata, MetadataDefault } from "../../../contants";
 import { IServiceModel } from "../../../database";
 import { setLoading, setOpenModal } from "../../../redux/appSlide";
 import { AdminLayout } from "../../Layouts/AdminLayout";
@@ -39,8 +39,6 @@ interface Service {
 interface Props {
   services?: Service;
 }
-
-const LIMIT_RECORDS = 10;
 
 const ServicePage: NextPage<Props> = ({ services }) => {
   const toast = useToast();
@@ -154,7 +152,7 @@ const ServicePage: NextPage<Props> = ({ services }) => {
               {currentRecords.map((record: IServiceModel) => {
                 const { _id, name, description, path, status } = record;
                 return (
-                  <Tr key={_id}>
+                  <Tr key={_id.toString()}>
                     <Td>{name}</Td>
                     <Td>{description}</Td>
                     <Td>{path}</Td>
