@@ -41,14 +41,14 @@ export const FeatureList: React.FC<BoxProps> = ({ ...props }) => {
           <Link href="/lien-he" passHref>
             <Button
               as="a"
-              variant="solid"
+              variant="outline"
               w={{ base: "full", sm: "auto" }}
               size="lg"
-              bgColor="btnBg"
-              color="btnText"
+              bgColor="primary"
+              color="textSecondary"
               _hover={{
-                bgColor: "btnText",
-                color: "btnBg",
+                bgColor: "textSecondary",
+                color: "primary",
               }}
               mt={3}
               borderRadius="2rem"

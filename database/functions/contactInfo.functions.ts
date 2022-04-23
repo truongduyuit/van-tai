@@ -1,6 +1,6 @@
 import { MongooseBaseService } from "..";
 import { ContactInfo, IContactInfoModel } from "../models/contactInfo.model";
 
-export const ContactInfoFunction = new MongooseBaseService<IContactInfoModel>(
-  ContactInfo
+export const ContactInfoFunction = Object.freeze(
+  new MongooseBaseService<IContactInfoModel>(ContactInfo)
 );

@@ -13,14 +13,22 @@ import {
   useDisclosure,
   VStack,
 } from "@chakra-ui/react";
+import { useRouter } from "next/router";
 import { FiChevronDown, FiMenu } from "react-icons/fi";
+import { AdminPagePath } from "../../contants/pagePath";
 import { Sidebar } from "../Sidebar";
 
 const AdminLayout: React.FC<{ name?: string; page?: string }> = ({
   children,
   name,
 }) => {
+  const router = useRouter();
   const { isOpen, onClose, onOpen } = useDisclosure();
+
+  const handleLogout = () => {
+    localStorage.removeItem("access_token");
+    router.push(`/admin/${AdminPagePath.login}`);
+  };
 
   return (
     <Box as="section" bg="#fff" minH="100vh">
@@ -73,7 +81,7 @@ const AdminLayout: React.FC<{ name?: string; page?: string }> = ({
               </MenuButton>
               <MenuList>
                 <MenuDivider />
-                <MenuItem>Đăng xuất</MenuItem>
+                <MenuItem onClick={handleLogout}>Đăng xuất</MenuItem>
               </MenuList>
             </Menu>
           </Flex>

@@ -56,3 +56,14 @@ export const POST_DELETE_FAIL: ResponseError = {
   code: "POST_DELETE_FAIL",
   message: "Edit service failed",
 };
+
+export const CONTACT_INFO_EDIT_FAIL: ResponseError = {
+  code: "CONTACT_INFO_EDIT_FAIL",
+  message: "Edit contact info failed",
+};
+
+export const CONTACT_INFO_GET_FAIL: ResponseError = {
+  code: "CONTACT_INFO_GET_FAIL",
+  message: "Get contact info failed",
+};
+

@@ -1,17 +1,36 @@
-import { Box } from "@chakra-ui/react";
 import type { NextPage } from "next";
 import Head from "next/head";
 import Script from "next/script";
-import {
-  CallToAction,
-  Contact,
-  FeatureList,
-  Hero,
-  Statistic,
-} from "../components";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { Contact, FeatureList, Hero, Statistic } from "../components";
 import { Layout } from "../components/Layouts/Layout";
+import { DefaultQuery } from "../contants";
+import {
+  ContactInfoFunction,
+  IContactInfoModel,
+  IServiceModel,
+  ServiceFuntions,
+} from "../database";
+import { setContactInfo } from "../redux/contactInfoSlide";
+import { setServices } from "../redux/serviceSlide";
 
-const Home: NextPage = () => {
+interface Props {
+  services: IServiceModel[];
+  contactInfo: IContactInfoModel;
+}
+
+const Home: NextPage<Props> = ({ services, contactInfo }) => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(setServices(services));
+  }, [dispatch, services]);
+
+  useEffect(() => {
+    dispatch(setContactInfo(contactInfo));
+  }, [contactInfo, dispatch]);
+
   return (
     <div>
       <Head>
@@ -25,13 +44,11 @@ const Home: NextPage = () => {
       ></Script>
 
       <Layout mx={{ base: 5, md: 14 }}>
-        <Hero mt={{ md: 5 }} />
+        <Hero />
 
         <FeatureList />
 
         <Statistic />
-
-        {/* <CallToAction mt={5} /> */}
 
         <Contact h="100vh" />
       </Layout>
@@ -42,7 +59,15 @@ const Home: NextPage = () => {
 export default Home;
 
 export async function getServerSideProps() {
+  const [services, contactInfo] = await Promise.all([
+    ServiceFuntions.getByQuery(DefaultQuery),
+    ContactInfoFunction.getOne({}),
+  ]);
+
   return {
-    props: {}, // will be passed to the page component as props
+    props: {
+      services: JSON.parse(JSON.stringify(services.records)),
+      contactInfo: JSON.parse(JSON.stringify(contactInfo)),
+    },
   };
 }

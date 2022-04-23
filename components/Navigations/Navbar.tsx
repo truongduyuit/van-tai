@@ -1,48 +1,42 @@
 import {
+  ChevronDownIcon,
+  ChevronRightIcon,
+  CloseIcon,
+  HamburgerIcon,
+} from "@chakra-ui/icons";
+import {
   Box,
-  Flex,
-  Text,
-  IconButton,
-  Button,
-  Stack,
   Collapse,
+  Flex,
   Icon,
+  IconButton,
   Link,
   Popover,
-  PopoverTrigger,
   PopoverContent,
-  useBreakpointValue,
-  useDisclosure,
+  PopoverTrigger,
+  Stack,
+  Text,
   useColorModeValue,
-  useColorMode,
+  useDisclosure,
   useMediaQuery,
 } from "@chakra-ui/react";
-import {
-  HamburgerIcon,
-  CloseIcon,
-  ChevronRightIcon,
-  MoonIcon,
-  SunIcon,
-  ChevronDownIcon,
-} from "@chakra-ui/icons";
+import { useSelector } from "react-redux";
+import { IServiceModel } from "../../database";
+import { RootState } from "../../redux/store";
 import { Hotline } from "./Hotline";
 
 export default function Navbar() {
   const [isMobile] = useMediaQuery("(max-width: 768px)");
-  const { colorMode, toggleColorMode } = useColorMode();
   const { isOpen, onToggle } = useDisclosure();
 
   return (
     <Box>
       <Flex
-        bg={useColorModeValue("light.bg", "dark.bg")}
-        color={useColorModeValue("light.text", "dark.text")}
         minH={"60px"}
         py={{ base: 2 }}
         px={{ base: 4 }}
         borderBottom={1}
         borderStyle="solid"
-        // borderColor={useColorModeValue("gray.200", "gray.900")}
         align="center"
       >
         <Flex
@@ -61,12 +55,12 @@ export default function Navbar() {
         </Flex>
         <Flex flex={{ base: 1 }} justify={{ base: "center", md: "start" }}>
           <Text
-            textAlign={useBreakpointValue({ base: "center", md: "left" })}
+            textAlign={{ base: "center", md: "left" }}
             fontFamily={"heading"}
             color={useColorModeValue("gray.800", "white")}
           >
             Logo
-            {isMobile && <Hotline my={5} />}
+            {isMobile && <Hotline />}
           </Text>
 
           <Flex display={{ base: "none", md: "flex" }} ml={10}>
@@ -81,9 +75,6 @@ export default function Navbar() {
           spacing={1}
         >
           {!isMobile && <Hotline />}
-          <Button onClick={toggleColorMode}>
-            {colorMode === "light" ? <MoonIcon /> : <SunIcon />}
-          </Button>
         </Stack>
       </Flex>
 
@@ -97,7 +88,8 @@ export default function Navbar() {
 const DesktopNav = () => {
   const linkColor = "text";
   const linkHoverColor = "highlight";
-  const popoverContentBgColor = useColorModeValue("#fff", "#1A202C");
+
+  const _services = useSelector((state: RootState) => state.service.services);
 
   return (
     <Stack direction={"row"} spacing={4}>
@@ -118,24 +110,26 @@ const DesktopNav = () => {
                 }}
               >
                 {navItem.label}
-                {navItem.children && (
+                {navItem.label === "Dịch vụ" && _services.length > 0 && (
                   <Icon as={ChevronDownIcon} ml="0.2rem" w={4} h={6} />
                 )}
               </Link>
             </PopoverTrigger>
 
-            {navItem.children && (
-              <PopoverContent
-                boxShadow={"xl"}
-                bg={popoverContentBgColor}
-                p={4}
-                rounded={"xl"}
-                minW={"sm"}
-              >
+            {navItem.label === "Dịch vụ" && _services.length > 0 && (
+              <PopoverContent boxShadow={"xl"} p={4} rounded={"xl"} minW={"sm"}>
                 <Stack>
-                  {navItem.children.map((child) => (
-                    <DesktopSubNav key={child.label} {...child} />
-                  ))}
+                  {_services?.map((child: IServiceModel) => {
+                    const { name, description, path } = child;
+                    return (
+                      <DesktopSubNav
+                        key={name}
+                        label={name}
+                        subLabel={description}
+                        href={path}
+                      />
+                    );
+                  })}
                 </Stack>
               </PopoverContent>
             )}
@@ -200,6 +194,8 @@ const MobileNav = () => {
 const MobileNavItem = ({ label, children, href }: NavItem) => {
   const { isOpen, onToggle } = useDisclosure();
 
+  const _services = useSelector((state: RootState) => state.service.services);
+
   return (
     <Stack spacing={4} onClick={children && onToggle}>
       <Flex
@@ -212,13 +208,8 @@ const MobileNavItem = ({ label, children, href }: NavItem) => {
           textDecoration: "none",
         }}
       >
-        <Text
-          fontWeight={600}
-          color={useColorModeValue("gray.600", "gray.200")}
-        >
-          {label}
-        </Text>
-        {children && (
+        <Text fontWeight={600}>{label}</Text>
+        {label === "Dịch vụ" && _services.length > 0 && (
           <Icon
             as={ChevronDownIcon}
             transition={"all .25s ease-in-out"}
@@ -235,13 +226,13 @@ const MobileNavItem = ({ label, children, href }: NavItem) => {
           pl={4}
           borderLeft={1}
           borderStyle={"solid"}
-          borderColor={useColorModeValue("gray.200", "gray.700")}
           align={"start"}
         >
-          {children &&
-            children.map((child) => (
-              <Link key={child.label} py={2} href={child.href}>
-                {child.label}
+          {label === "Dịch vụ" &&
+            _services.length > 0 &&
+            _services?.map((child) => (
+              <Link key={child.name} py={2} href={child.path}>
+                {child.name}
               </Link>
             ))}
         </Stack>
@@ -264,26 +255,11 @@ const NAV_ITEMS: Array<NavItem> = [
   },
   {
     label: "Dịch vụ",
-    children: [
-      {
-        label: "Vận chuyển nhanh",
-        subLabel: "Nhanh - Gọn - Giá rẻ",
-        href: "#",
-      },
-      {
-        label: "Vận chuyển ngoại thành",
-        subLabel: "Nhận chuyển hàng đi các tỉnh",
-        href: "#",
-      },
-    ],
+    children: [{ label: "Bài viết", href: "/bai-viet" }],
   },
   {
-    label: "Tra cứu đơn hàng",
-    href: "/tra-cuu",
-  },
-  {
-    label: "Tin tức",
-    href: "/tin-tuc",
+    label: "Bài viết",
+    href: "/bai-viet",
   },
   {
     label: "Liên hệ",

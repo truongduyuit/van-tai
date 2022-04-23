@@ -5,21 +5,18 @@ export interface IContactInfoModel extends mongoose.Document {
   phone: string;
   email: string;
   address: string;
-  social: {
-    facebook: string;
-    youtube: string;
-    twitter: string;
-    tiktok: string;
-    instagram: string;
-    zalo: string;
+  facebook: {
+    id: string;
+    fanpage: string;
+    person: string;
   };
+  zalo: string;
 }
 
 const schema = new mongoose.Schema(
   {
     phone: {
       type: String,
-      required: true,
     },
     email: {
       type: String,
@@ -27,13 +24,19 @@ const schema = new mongoose.Schema(
     address: {
       type: String,
     },
-    social: {
-      facebook: String,
-      youtube: String,
-      twitter: String,
-      tiktok: String,
-      instagram: String,
-      zalo: String,
+    facebook: {
+      id: {
+        type: String,
+      },
+      fanpage: {
+        type: String,
+      },
+      person: {
+        type: String,
+      },
+    },
+    zalo: {
+      type: String,
     },
   },
   {

@@ -1,12 +1,16 @@
 import { Action, configureStore, ThunkAction } from "@reduxjs/toolkit";
 import appReducer from "./appSlide";
 import pageReducer from "./pageSlide";
+import serviceReducer from "./serviceSlide";
+import contactInfoReducer from "./contactInfoSlide";
 
 export function makeStore() {
   return configureStore({
     reducer: {
       app: appReducer,
       page: pageReducer,
+      service: serviceReducer,
+      contactInfo: contactInfoReducer,
     },
   });
 }

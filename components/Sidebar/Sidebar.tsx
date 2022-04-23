@@ -12,9 +12,16 @@ import {
 } from "@chakra-ui/react";
 import Link from "next/link";
 import React from "react";
-import { FaArrowRight, FaHome, FaTruckMoving, FaFilePdf } from "react-icons/fa";
-import { useSelector } from "react-redux";
+import {
+  FaArrowRight,
+  FaFilePdf,
+  FaHome,
+  FaTruckMoving,
+  FaHeadphones,
+} from "react-icons/fa";
+import { useDispatch, useSelector } from "react-redux";
 import { AdminPagePath } from "../../contants/pagePath";
+import { setPageName } from "../../redux/pageSlide";
 import { RootState } from "../../redux/store";
 
 const NavItem: React.FC<
@@ -25,7 +32,8 @@ const NavItem: React.FC<
 > = ({ ...props }) => {
   const { icon, url, children, ...rest } = props;
 
-  const _page = useSelector((state: RootState) => state.page.name);
+  const dispatch = useDispatch();
+  const _pageName = useSelector((state: RootState) => state.page.name);
 
   return (
     <Link href={url} passHref>
@@ -35,7 +43,7 @@ const NavItem: React.FC<
         pl="4"
         py="3"
         cursor="pointer"
-        bgColor={url === _page ? "secondary" : "primary"}
+        bgColor={url === _pageName ? "secondary" : "primary"}
         _hover={{
           bgColor: "secondary",
         }}
@@ -44,6 +52,7 @@ const NavItem: React.FC<
         transition=".15s ease"
         borderTopRightRadius=".5rem"
         borderBottomRightRadius=".5rem"
+        onClick={() => dispatch(setPageName(url))}
         {...rest}
       >
         {icon && <Icon mx="2" boxSize="4" as={icon} />}
@@ -91,35 +100,9 @@ const SidebarContent: React.FC<BoxProps> = ({ ...props }) => {
         <NavItem icon={FaFilePdf} url={AdminPagePath.post}>
           Bài viết
         </NavItem>
-        <NavItem icon={FaHome} url={AdminPagePath.dashboard}>
-          Đơn vận chuyển
+        <NavItem icon={FaHeadphones} url={AdminPagePath.contactInfo}>
+          Thông tin liên hệ
         </NavItem>
-        <NavItem icon={FaHome} url={AdminPagePath.dashboard}>
-          Liên hệ
-        </NavItem>
-        <NavItem
-          icon={FaHome}
-          onClick={integrations.onToggle}
-          url={AdminPagePath.dashboard}
-        >
-          Integrations
-          <Icon
-            as={FaArrowRight}
-            ml="auto"
-            transform={integrations.isOpen ? "rotate(90deg)" : "auto"}
-          />
-        </NavItem>
-        <Collapse in={integrations.isOpen}>
-          <NavItem pl="12" py="2" url={AdminPagePath.dashboard}>
-            Shopify
-          </NavItem>
-          <NavItem pl="12" py="2" url={AdminPagePath.dashboard}>
-            Slack
-          </NavItem>
-          <NavItem pl="12" py="2" url={AdminPagePath.dashboard}>
-            Zapier
-          </NavItem>
-        </Collapse>
       </Flex>
     </Box>
   );

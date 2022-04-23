@@ -1,9 +1,21 @@
 import { NextPage, NextPageContext } from "next";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { LoginPage, PostPage, ServicePage } from "../../components";
+import {
+  ContactInfoPage,
+  LoginPage,
+  PostPage,
+  ServicePage,
+} from "../../components";
+import { AdminLayout } from "../../components/Layouts/AdminLayout";
+import { DefaultQuery } from "../../contants";
 import { AdminPagePath } from "../../contants/pagePath";
-import { PostFuntions, ServiceFuntions } from "../../database";
+import {
+  ContactInfoFunction,
+  MongooseBaseService,
+  PostFuntions,
+  ServiceFuntions,
+} from "../../database";
 import { setPageName } from "../../redux/pageSlide";
 
 interface Props {
@@ -22,8 +34,11 @@ const handlePage = (page: string, params: any) => {
     case AdminPagePath.login: {
       return <LoginPage {...params} />;
     }
+    case AdminPagePath.contactInfo: {
+      return <ContactInfoPage {...params} />;
+    }
     default: {
-      return <>This is {page} page</>;
+      return <AdminLayout>This is {page} page</AdminLayout>;
     }
   }
 };
@@ -45,31 +60,18 @@ export const getServerSideProps = async (context: NextPageContext) => {
   let params = {};
   switch (page) {
     case AdminPagePath.service: {
-      const services = await ServiceFuntions.getByQuery({
-        query: {
-          status: true,
-        },
-        page: 0,
-        limit: process.env.LIMIT_RECORDS ? +process.env.LIMIT_RECORDS : 10,
-        sort: {
-          createdAt: -1,
-        },
-      });
+      const services = await ServiceFuntions.getByQuery(DefaultQuery);
       params = { ...params, services };
       break;
     }
     case AdminPagePath.post: {
-      const posts = await PostFuntions.getByQuery({
-        query: {
-          status: true,
-        },
-        page: 0,
-        limit: process.env.LIMIT_RECORDS ? +process.env.LIMIT_RECORDS : 10,
-        sort: {
-          createdAt: -1,
-        },
-      });
+      const posts = await PostFuntions.getByQuery(DefaultQuery);
       params = { ...params, posts };
+      break;
+    }
+    case AdminPagePath.contactInfo: {
+      const contactInfo = await ContactInfoFunction.getOne({});
+      params = { ...params, contactInfo };
       break;
     }
     case AdminPagePath.dashboard: {

@@ -1,7 +1,9 @@
 import {
   Box,
   BoxProps,
+  Center,
   chakra,
+  Flex,
   SimpleGrid,
   useColorModeValue,
 } from "@chakra-ui/react";
@@ -9,6 +11,7 @@ import lotWeb, { AnimationItem } from "lottie-web";
 import Link from "next/link";
 import { useEffect } from "react";
 import TruckAnimation from "../../animations/truck_bg-fff.json";
+import { ArrowRightIcon } from "@chakra-ui/icons";
 
 export const Hero: React.FC<BoxProps> = ({ ...props }) => {
   useEffect(() => {
@@ -31,10 +34,9 @@ export const Hero: React.FC<BoxProps> = ({ ...props }) => {
   }, []);
 
   return (
-    <SimpleGrid columns={{ base: 1, md: 2 }} {...props}>
+    <SimpleGrid columns={{ base: 1, md: 2 }} {...props} position="relative">
       <Box
         pos="relative"
-        pb={{ base: 8, sm: 16, md: 20, lg: 28, xl: 32 }}
         maxW={{ lg: "2xl" }}
         w={{ lg: "full" }}
         zIndex={1}
@@ -56,9 +58,9 @@ export const Hero: React.FC<BoxProps> = ({ ...props }) => {
               <chakra.span color="text">
                 Ưu tiên số 1 của chúng tôi là
               </chakra.span>
-              <chakra.span color="highlight"> tiết kiệm thời gian </chakra.span>
+              <chakra.span color="primary"> tiết kiệm thời gian </chakra.span>
               <chakra.span color="text">và</chakra.span>
-              <chakra.span color="highlight"> tiền bạc </chakra.span>
+              <chakra.span color="primary"> tiền bạc </chakra.span>
               <chakra.span color={useColorModeValue("gray.900", "brand.700")}>
                 cho bạn
               </chakra.span>
@@ -88,9 +90,9 @@ export const Hero: React.FC<BoxProps> = ({ ...props }) => {
                   alignItems="center"
                   justifyContent="center"
                   fontSize={{ base: "md", md: "lg" }}
-                  border="solid 1px highlight"
-                  color="text"
-                  _hover={{ bg: "whiteAlpha.900", color: "highlight" }}
+                  border="solid 1px"
+                  borderColor="primary"
+                  color="primary"
                   px={{ base: 8, md: 10 }}
                   py={{ base: 3, md: 4 }}
                   cursor="pointer"
@@ -109,12 +111,12 @@ export const Hero: React.FC<BoxProps> = ({ ...props }) => {
                     justifyContent="center"
                     px={{ base: 8, md: 10 }}
                     py={{ base: 3, md: 4 }}
-                    border="solid 1px highlight"
+                    border="solid 1px"
+                    borderColor="primary"
                     fontSize={{ base: "md", md: "lg" }}
                     rounded="md"
-                    color="whiteAlpha.900"
-                    bg="light.highlight"
-                    _hover={{ bg: "whiteAlpha.900", color: "highlight" }}
+                    color="textSecondary"
+                    bg="primary"
                     cursor="pointer"
                     borderRadius="2rem"
                   >
@@ -126,7 +128,27 @@ export const Hero: React.FC<BoxProps> = ({ ...props }) => {
           </Box>
         </Box>
       </Box>
-      <Box id="hero_truck" mt={-10}></Box>
+      <Box id="hero_truck" mt={{ base: 0, md: -10 }}></Box>
+      <Flex
+        flexDir="column"
+        justify="center"
+        align="center"
+        position="absolute"
+        left="50%"
+        bottom="0"
+        transform="translate(-50%, 0)"
+        border="solid 1px"
+        borderColor="primary"
+        p={5}
+        color="primary"
+        cursor="pointer"
+        as="a"
+        href="#tham-khao"
+        scrollBehavior="smooth"
+      >
+        <Box>Khám phá</Box>
+        <ArrowRightIcon transform="rotate(90deg)" />
+      </Flex>
     </SimpleGrid>
   );
 };

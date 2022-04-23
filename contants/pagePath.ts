@@ -3,4 +3,5 @@ export const AdminPagePath = {
   service: "dich-vu",
   post: "bai-viet",
   login: "dang-nhap",
+  contactInfo: "thong-tin-lien-he",
 };

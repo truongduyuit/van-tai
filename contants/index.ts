@@ -24,3 +24,14 @@ export const MetadataDefault: Metadata = {
 };
 
 export const LIMIT_RECORDS = 10;
+
+export const DefaultQuery = {
+  query: {
+    status: true,
+  },
+  page: 0,
+  limit: process.env.LIMIT_RECORDS ? +process.env.LIMIT_RECORDS : 10,
+  sort: {
+    createdAt: -1,
+  },
+};
